@@ -3,9 +3,9 @@
 #define KEY_PIN FREQ_Pin // 注意查看中断服务函数是否与该管脚对应
 
 // 定时器为100ms定时
-#define KEY_TIME_IDLE 4     // 按键动作空闲时间
-#define KEY_TIME_CONTINUS 5 // 按键动作持续时间
-#define KEY_TIME_OUT 20     // 按键超时
+#define KEY_TIME_IDLE 4      // 按键动作空闲时间
+#define KEY_TIME_CONTINUS 20 // 按键动作持续时间
+#define KEY_TIME_OUT 50      // 按键超时
 
 // 事件类型
 #define EVENT_NONE_CLICK 0x00   // 无动作

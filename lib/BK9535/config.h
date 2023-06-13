@@ -82,10 +82,10 @@ typedef struct
 #define PAIR_FREQ_CHA 7700 // A通道对频频点
 #define PAIR_FREQ_CHB 7490 // B通道对频频点
 
-#define FREQ_NUM 10  // 工作频点数量
-#define FREQ_STEP 10 // 工作频点间隔
+#define FREQ_NUM 10 // 工作频点数量
+#define FREQ_STEP 3 // 工作频点间隔
 
-#define START_FREQ_CHA 7600 // A通道起始频点
+#define START_FREQ_CHA 6400 // A通道起始频点
 #define START_FREQ_CHB 7500 // B通道起始频点
 
 #define USE_I2S_AUDOI 1          // 0 - 使用MIC作为音源, 1 - 使用I2S音源

@@ -1,5 +1,6 @@
 #include "key.h"
 #include "bk9535.h"
+#include "tim.h"
 #include <stdio.h>
 
 KEY_PROCESS_TypeDef key;
@@ -112,13 +113,14 @@ void KEY_Scan(void)
         switch (key.event_current_type)
         {
         case EVENT_SHORT_CLICK:
-            printf("单击\r\n");
+
             break;
         case EVENT_DOUBLE_CLICK:
-            printf("%d连击\r\n", key.press_cnt);
+
             break;
         case EVENT_LONG_CLICK:
-            printf("长按\r\n");
+            HAL_GPIO_TogglePin(CE_GPIO_Port, CE_Pin);
+            HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
             break;
         default:
             printf("none\r\n");
@@ -146,5 +148,5 @@ void KEY_Config(void)
     key.time_idle = KEY_TIME_OUT;
 
     // 使能定时器
-    TIM3->CR1 |= 0x0001;
+    HAL_TIM_Base_Start_IT(&htim4);
 }

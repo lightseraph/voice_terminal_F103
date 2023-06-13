@@ -58,6 +58,7 @@
 
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -225,7 +226,7 @@ void EXTI0_IRQHandler(void)
     key.flag.check = 1;
     key.time_idle = 0; // 按键空闲时间置零，准备开始计时
   }
-  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+
   /* USER CODE END EXTI0_IRQn 1 */
 }
 
@@ -240,10 +241,23 @@ void TIM3_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
 
-  TIM3->SR = 0x0000; // 清除中断标志位
+  /* USER CODE END TIM3_IRQn 1 */
+}
+
+/**
+ * @brief This function handles TIM4 global interrupt.
+ */
+void TIM4_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM4_IRQn 0 */
+
+  /* USER CODE END TIM4_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim4);
+  /* USER CODE BEGIN TIM4_IRQn 1 */
+  TIM4->SR = 0x0000; // 清除中断标志位
   KEY_Process();
   KEY_Scan();
-  /* USER CODE END TIM3_IRQn 1 */
+  /* USER CODE END TIM4_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

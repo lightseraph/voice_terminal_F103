@@ -91,9 +91,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
-  MX_TIM3_Init();
+  MX_TIM3_Init(); // 红外接收解码定时器
+  MX_TIM4_Init(); // 按键长、短按识别定时器
   /* USER CODE BEGIN 2 */
-  IIC_Init();
+  // IIC_Init();
   KEY_Config();
   HAL_Delay(100);
 
@@ -107,8 +108,9 @@ int main(void)
   cfg.mode = PCM_SLAVE;
   cfg.lrck = PCM_LRCK_I;
   BK_Tx_I2SOpen(cfg);
-  SwitchFreqByIndex(USER_DATA.rUserFreqIndex);
-  TX_WriteID(USER_DATA.UserId.dword);
+  // SwitchFreqByIndex(USER_DATA.rUserFreqIndex);
+  TX_TuneFreq(648100);
+  // TX_WriteID(USER_DATA.UserId.dword);
 
   /* USER CODE END 2 */
 
