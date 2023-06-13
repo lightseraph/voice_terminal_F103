@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -25,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "bk9535.h"
 #include "syscall.h"
+#include "key.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,9 +91,13 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  HAL_Delay(500);
-  if (Init_TX())
+  IIC_Init();
+  KEY_Config();
+  HAL_Delay(100);
+
+  if (BK_Init())
     Flash_LED(LED_GREEN, 50, 10, LIGHT_ON);
 
   t_PCMCfg cfg;

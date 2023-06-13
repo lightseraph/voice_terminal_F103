@@ -3,6 +3,7 @@
 
 #include "main.h"
 
+extern vs8 keypress_remian;
 typedef enum
 {
     LED_RED,
@@ -18,7 +19,7 @@ typedef enum
 
 void Flash_LED(LED_TYPE led, u16 interval, u8 count, LED_AFTER_FLASH cond);
 
-void delay_nus(volatile uint32_t num);
-void delay_nms(volatile uint32_t num);
+void delay_nus(vs32 num);
+void delay_nms(vs32 num);
 
 #endif

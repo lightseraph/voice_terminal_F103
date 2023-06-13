@@ -1,6 +1,8 @@
 #include "syscall.h"
 
-void delay_nus(volatile uint32_t nus)
+vs8 keypress_remain = 0;
+
+void delay_nus(vs32 nus)
 {
     if (SysTick_Config(SystemCoreClock / 1000000))
     {
@@ -10,11 +12,11 @@ void delay_nus(volatile uint32_t nus)
     time_delay = nus; // 读取定时时间
     while (time_delay)
         ;
-    SysTick->CTRL = 0x00; // 关闭计数器
-    SysTick->VAL = 0X00;  // 清空计数器
+    SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk; // 关闭计数器
+    SysTick->VAL = 0X00;                       // 清空计数器
 }
 
-void delay_nms(volatile uint32_t nms)
+void delay_nms(vs32 nms)
 {
     if (SysTick_Config(SystemCoreClock / 1000))
     {
@@ -24,8 +26,8 @@ void delay_nms(volatile uint32_t nms)
     time_delay = nms; // 读取定时时间
     while (time_delay)
         ;
-    SysTick->CTRL = 0x00; // 关闭计数器
-    SysTick->VAL = 0X00;  // 清空计数器
+    SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk; // 关闭计数器
+    SysTick->VAL = 0X00;                       // 清空计数器
 }
 
 void Flash_LED(LED_TYPE led, u16 interval, u8 count, LED_AFTER_FLASH cond)

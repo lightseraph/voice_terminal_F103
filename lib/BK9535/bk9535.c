@@ -1,8 +1,7 @@
 #define __BK9531_ProC__
 
 #include "bk9535.h"
-#include "ctiic.h"
-#include "config.h"
+#include "syscall.h"
 #include <stdlib.h>
 
 // TX初始化表格。
@@ -52,7 +51,7 @@ unsigned char tx_reg_val[37][5] =
 };
 
 // TX初始化函数
-u8 Init_TX(void)
+u8 BK_Init(void)
 {
     unsigned char retry;
     struct InitData
@@ -149,7 +148,7 @@ void TX_PN9_Stop(void)
 void TX_TuneFreq(unsigned long khz)
 {
     unsigned long freqdat;
-    unsigned char tmp[4];
+    unsigned char tmp[4] = {0};
     unsigned char status;
 
     TX_I2C_Read(0x06, tmp);
@@ -353,19 +352,19 @@ u8 TX_I2C_Write(u8 reg, u8 *buf)
     retry = TX_I2C_RETRY_TIMES;
     while (retry--)
     {
-        CT_IIC_Start();
-        if (CT_IIC_Send_Byte(CHIP_DEV_TX))
+        IIC_Start();
+        if (IIC_SendByte(CHIP_DEV_TX))
             continue;
         reg = reg << 1;
-        if (CT_IIC_Send_Byte(reg))
+        if (IIC_SendByte(reg))
             continue;
         for (i = 0; i < 4; i++)
         {
-            CT_IIC_Send_Byte(buf[i]);
+            IIC_SendByte(buf[i]);
         }
         break;
     }
-    CT_IIC_Stop();
+    IIC_Stop();
     if (retry == 0)
         return 0;
     else
@@ -374,7 +373,7 @@ u8 TX_I2C_Write(u8 reg, u8 *buf)
 
 u8 TX_I2C_Read(u8 reg, u8 *buf)
 {
-    unsigned char retry, i;
+    unsigned char retry = 0, i;
 
     if (reg <= 0x0b)
     {
@@ -389,27 +388,27 @@ u8 TX_I2C_Read(u8 reg, u8 *buf)
         retry = TX_I2C_RETRY_TIMES;
         while (retry--)
         {
-            CT_IIC_Start();
-            if (CT_IIC_Send_Byte(CHIP_DEV_TX))
+            IIC_Start();
+            if (IIC_SendByte(CHIP_DEV_TX))
                 continue;
 
             reg = reg << 1;
             reg |= 0x01;
-            // CT_IIC_Wait_Ack();
-            if (CT_IIC_Send_Byte(reg))
+            // IIC_Wait_Ack();
+            if (IIC_SendByte(reg))
                 continue;
-            // CT_IIC_Wait_Ack();
+            // IIC_Wait_Ack();
 
             for (i = 0; i < 3; i++)
             {
-                buf[i] = CT_IIC_Read_Byte();
-                CT_IIC_Ack();
+                buf[i] = IIC_ReadByte();
+                IIC_Ack();
             }
-            buf[i] = CT_IIC_Read_Byte();
-            CT_IIC_NAck();
+            buf[i] = IIC_ReadByte();
+            IIC_NAck();
             break;
         }
-        CT_IIC_Stop();
+        IIC_Stop();
     }
     if (retry == 0)
         return 0;
@@ -504,10 +503,10 @@ void SamplingRateSel(e_WorkMode mode)
 {
     // analog_reg_val[5][0] &= ~0x18;
     analog_reg_val[5][0] |= WorkMode[mode].reg5_28_27;
-    TX_I2C_Write(0x05, analog_reg_val[5]);
+    TX_I2C_Write(0x05, (u8 *)analog_reg_val[5]);
 
     analog_reg_val[8][1] &= ~0x10;
-    TX_I2C_Write(0x08, analog_reg_val[8]);
+    TX_I2C_Write(0x08, (u8 *)analog_reg_val[8]);
 
     TX_I2C_Read(0x31, reg_val);
     reg_val[0] &= ~0xc0;

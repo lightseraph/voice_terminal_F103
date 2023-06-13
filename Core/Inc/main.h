@@ -64,6 +64,7 @@ void Error_Handler(void);
 #define LED_RED_GPIO_Port GPIOA
 #define FREQ_Pin GPIO_PIN_0
 #define FREQ_GPIO_Port GPIOB
+#define FREQ_EXTI_IRQn EXTI0_IRQn
 #define CE_Pin GPIO_PIN_13
 #define CE_GPIO_Port GPIOB
 #define LED_GREEN_Pin GPIO_PIN_4
@@ -75,9 +76,6 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
   // 定义一些常用的数据类型短关键字
-  typedef int32_t s32;
-  typedef int16_t s16;
-  typedef int8_t s8;
 
   typedef const int32_t sc32;
   typedef const int16_t sc16;

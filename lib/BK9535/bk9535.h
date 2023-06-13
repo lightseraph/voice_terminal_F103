@@ -2,6 +2,7 @@
 #define __BK9531_H__
 
 #include "config.h"
+#include "ctiic.h"
 #include "main.h"
 
 #define STATE_TsdIdle 0
@@ -27,7 +28,7 @@
 
 #ifdef __BK9531_ProC__
 #define __TX_EXT__
-static unsigned char LinkIDTmp[4];
+// static unsigned char LinkIDTmp[4];
 unsigned char rTsdState;
 #else
 #define __TX_EXT__ extern
@@ -54,7 +55,7 @@ __TX_EXT__ volatile unsigned char analog_reg_val[12][4]; // Analog register valu
 __TX_EXT__ unsigned char rWorkChannel;
 __TX_EXT__ unsigned char rTriggerValue;
 
-__TX_EXT__ u8 Init_TX(void);
+__TX_EXT__ u8 BK_Init(void);
 __TX_EXT__ void TX_Reset_Chip(void);
 __TX_EXT__ void TX_SingleWave_Start(void);
 __TX_EXT__ void TX_SingleWave_Stop(void);
