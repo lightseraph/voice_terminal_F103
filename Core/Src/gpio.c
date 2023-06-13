@@ -56,10 +56,10 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(CE_GPIO_Port, CE_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, CE_Pin|LED_GREEN_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LED_GREEN_Pin|I2C_SCK_Pin|I2C_SCL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, I2C_SCK_Pin|I2C_SCL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = IR_Pin;

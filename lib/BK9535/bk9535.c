@@ -460,7 +460,7 @@ void BK_Tx_I2SOpen(t_PCMCfg cfg)
     }
     tmp |= (((unsigned long)cfg.bclk << 11) | ((unsigned long)cfg.lrck << 8));
     //////////////////////////////////
-#if 1 // 打开GPIO4的MCLK功能
+#if 0 // 打开GPIO4的MCLK功能
     tmp &= 0xFFFFFF00;
     tmp |= 0x40; // GPIO4设为第二功能输出
     tmp &= ~(7ul << 20);

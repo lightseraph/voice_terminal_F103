@@ -92,7 +92,17 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_Delay(500);
   if (Init_TX())
-    HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+    Flash_LED(LED_GREEN, 50, 10, LIGHT_ON);
+
+  t_PCMCfg cfg;
+  cfg.bclk = PCM_SCK_I;
+  cfg.dat = PCM_SDA_I;
+  cfg.ch = RIGHT_CHANNEL;
+  cfg.mode = PCM_SLAVE;
+  cfg.lrck = PCM_LRCK_I;
+  BK_Tx_I2SOpen(cfg);
+  SwitchFreqByIndex(USER_DATA.rUserFreqIndex);
+  TX_WriteID(USER_DATA.UserId.dword);
 
   /* USER CODE END 2 */
 

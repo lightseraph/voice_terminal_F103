@@ -23,37 +23,36 @@
 #define __MAIN_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
 
-  /* Private includes ----------------------------------------------------------*/
-  /* USER CODE BEGIN Includes */
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
 
-  /* USER CODE END Includes */
+/* USER CODE END Includes */
 
-  /* Exported types ------------------------------------------------------------*/
-  /* USER CODE BEGIN ET */
+/* Exported types ------------------------------------------------------------*/
+/* USER CODE BEGIN ET */
 
-  /* USER CODE END ET */
+/* USER CODE END ET */
 
-  /* Exported constants --------------------------------------------------------*/
-  /* USER CODE BEGIN EC */
+/* Exported constants --------------------------------------------------------*/
+/* USER CODE BEGIN EC */
 
-  /* USER CODE END EC */
+/* USER CODE END EC */
 
-  /* Exported macro ------------------------------------------------------------*/
-  /* USER CODE BEGIN EM */
+/* Exported macro ------------------------------------------------------------*/
+/* USER CODE BEGIN EM */
 
-  /* USER CODE END EM */
+/* USER CODE END EM */
 
-  /* Exported functions prototypes ---------------------------------------------*/
-  void Error_Handler(void);
+/* Exported functions prototypes ---------------------------------------------*/
+void Error_Handler(void);
 
-  /* USER CODE BEGIN EFP */
+/* USER CODE BEGIN EFP */
   extern volatile uint32_t time_delay;
 
 /* USER CODE END EFP */
@@ -74,7 +73,7 @@ extern "C"
 #define I2C_SCL_Pin GPIO_PIN_7
 #define I2C_SCL_GPIO_Port GPIOB
 
-  /* USER CODE BEGIN Private defines */
+/* USER CODE BEGIN Private defines */
   // 定义一些常用的数据类型短关键字
   typedef int32_t s32;
   typedef int16_t s16;
@@ -108,7 +107,7 @@ extern "C"
   typedef __I uint16_t vuc16;
   typedef __I uint8_t vuc8;
 
-  /* USER CODE END Private defines */
+/* USER CODE END Private defines */
 
 #ifdef __cplusplus
 }
