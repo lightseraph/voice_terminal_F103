@@ -1,6 +1,7 @@
 #include "key.h"
 #include "bk9535.h"
 #include "tim.h"
+#include "syscall.h"
 #include <stdio.h>
 
 KEY_PROCESS_TypeDef key;
@@ -113,17 +114,34 @@ void KEY_Scan(void)
         switch (key.event_current_type)
         {
         case EVENT_SHORT_CLICK:
-
+            SwitchNextFreq();
+            Flash_LED(LED_GREEN, 200, USER_DATA.rUserFreqIndex, FOLLOW_PREVIOUS);
             break;
         case EVENT_DOUBLE_CLICK:
-
+            SwitchPrevFreq();
+            Flash_LED(LED_GREEN, 200, USER_DATA.rUserFreqIndex, FOLLOW_PREVIOUS);
             break;
         case EVENT_LONG_CLICK:
             HAL_GPIO_TogglePin(CE_GPIO_Port, CE_Pin);
             HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+            if (HAL_GPIO_ReadPin(CE_GPIO_Port, CE_Pin))
+            {
+                if (BK_Init())
+                    Flash_LED(LED_GREEN, 50, 10, LIGHT_ON);
+
+                t_PCMCfg cfg;
+                cfg.bclk = PCM_SCK_I;
+                cfg.dat = PCM_SDA_I;
+                cfg.ch = RIGHT_CHANNEL;
+                cfg.mode = PCM_SLAVE;
+                cfg.lrck = PCM_LRCK_I;
+                BK_Tx_I2SOpen(cfg);
+                SwitchFreqByIndex(USER_DATA.rUserFreqIndex);
+                TX_WriteID(USER_DATA.UserId.dword);
+            }
             break;
         default:
-            printf("none\r\n");
+            // printf("none\r\n");
             break;
         }
         // 事件处理完需更新前态和现态

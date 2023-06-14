@@ -27,6 +27,7 @@
 #include "bk9535.h"
 #include "syscall.h"
 #include "key.h"
+#include "config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-volatile uint32_t time_delay;
+vu32 time_delay;
 
 /* USER CODE END PV */
 
@@ -69,7 +70,8 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  USER_DATA.rUserFreqIndex = 1;
+  USER_DATA.UserId.dword = DEF_USER_ID;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -98,6 +100,7 @@ int main(void)
   KEY_Config();
   HAL_Delay(100);
 
+  rWorkChannel = CHA;
   if (BK_Init())
     Flash_LED(LED_GREEN, 50, 10, LIGHT_ON);
 
@@ -108,9 +111,9 @@ int main(void)
   cfg.mode = PCM_SLAVE;
   cfg.lrck = PCM_LRCK_I;
   BK_Tx_I2SOpen(cfg);
-  // SwitchFreqByIndex(USER_DATA.rUserFreqIndex);
-  TX_TuneFreq(648100);
-  // TX_WriteID(USER_DATA.UserId.dword);
+  SwitchFreqByIndex(USER_DATA.rUserFreqIndex);
+  // TX_TuneFreq(648100);
+  TX_WriteID(USER_DATA.UserId.dword);
 
   /* USER CODE END 2 */
 
@@ -121,6 +124,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    delay_nms(20);
+    TX_Prevent_RF_UnLock();
   }
   /* USER CODE END 3 */
 }

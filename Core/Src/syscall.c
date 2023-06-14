@@ -2,7 +2,7 @@
 
 vs8 keypress_remain = 0;
 
-void delay_nus(vs32 nus)
+void delay_nus(vu32 nus)
 {
     if (SysTick_Config(SystemCoreClock / 1000000))
     {
@@ -16,7 +16,7 @@ void delay_nus(vs32 nus)
     SysTick->VAL = 0X00;                       // 清空计数器
 }
 
-void delay_nms(vs32 nms)
+void delay_nms(vu32 nms)
 {
     if (SysTick_Config(SystemCoreClock / 1000))
     {

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.ino": "cpp",
-        "main.h": "c"
+        "main.h": "c",
+        "config.h": "c"
     }
 }

@@ -77,12 +77,12 @@ typedef struct
 #define DEF_WORK_MODE WORK_MODE48K // 工作模式（采样率）
 
 #define DEF_PAIR_ID 0x12345678ul // 对频ID
-#define DEF_USER_ID 0x55555555ul // 出厂默认ID
+#define DEF_USER_ID 0x00000000ul // 出厂默认ID
 
 #define PAIR_FREQ_CHA 7700 // A通道对频频点
 #define PAIR_FREQ_CHB 7490 // B通道对频频点
 
-#define FREQ_NUM 10 // 工作频点数量
+#define FREQ_NUM 7  // 工作频点数量
 #define FREQ_STEP 3 // 工作频点间隔
 
 #define START_FREQ_CHA 6400 // A通道起始频点
