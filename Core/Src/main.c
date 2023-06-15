@@ -70,7 +70,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  USER_DATA.rUserFreqIndex = 1;
+  USER_DATA.rUserFreqIndex = DEFAULT_FREQ;
   USER_DATA.UserId.dword = DEF_USER_ID;
   /* USER CODE END 1 */
 
@@ -93,8 +93,8 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
-  MX_TIM3_Init(); // 红外接收解码定时器
-  MX_TIM4_Init(); // 按键长、短按识别定时器
+  MX_TIM3_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
   // IIC_Init();
   KEY_Config();
@@ -102,7 +102,7 @@ int main(void)
 
   rWorkChannel = CHA;
   if (BK_Init())
-    Flash_LED(LED_GREEN, 50, 10, LIGHT_ON);
+    Flash_LED(LED_GREEN, 50, 5, LIGHT_ON);
 
   t_PCMCfg cfg;
   cfg.bclk = PCM_SCK_I;
@@ -124,8 +124,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    delay_nms(20);
-    TX_Prevent_RF_UnLock();
+    delay_nms(50);
+    KEY_Scan();
+    // TX_Prevent_RF_UnLock();
   }
   /* USER CODE END 3 */
 }

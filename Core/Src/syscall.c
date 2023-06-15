@@ -32,7 +32,7 @@ void delay_nms(vu32 nms)
 
 void Flash_LED(LED_TYPE led, u16 interval, u8 count, LED_AFTER_FLASH cond)
 {
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count * 2; i++)
     {
         if (led == LED_RED)
             HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);

@@ -513,3 +513,8 @@ void SamplingRateSel(e_WorkMode mode)
     reg_val[0] |= WorkMode[mode].reg31_31_30;
     TX_I2C_Write(0x31, reg_val);
 }
+
+void Adjust_XTAL(u8 value)
+{
+    TX_I2C_Read(0x3A, reg_val);
+}

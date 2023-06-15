@@ -90,6 +90,7 @@ typedef struct
 
 #define USE_I2S_AUDOI 1          // 0 - 使用MIC作为音源, 1 - 使用I2S音源
 #define USE_BK9524_IR_FUNCTION 0 // 0 - 关闭BK9524红外码输出功能, 1 - 使能BK9524红外码输出功能
+#define DEFAULT_FREQ 7           // 启动默认频点
 
 #if USE_BK9524_IR_FUNCTION
 /*

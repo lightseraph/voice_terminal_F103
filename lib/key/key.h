@@ -5,7 +5,7 @@
 // 定时器为100ms定时
 #define KEY_TIME_IDLE 4      // 按键动作空闲时间
 #define KEY_TIME_CONTINUS 20 // 按键动作持续时间
-#define KEY_TIME_OUT 50      // 按键超时
+#define KEY_TIME_OUT 40      // 按键超时
 
 // 事件类型
 #define EVENT_NONE_CLICK 0x00   // 无动作

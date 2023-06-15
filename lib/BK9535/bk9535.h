@@ -75,6 +75,7 @@ __TX_EXT__ void Set_TX_Volume(unsigned char vol);
 __TX_EXT__ void EnableAudioIndicator(void);
 __TX_EXT__ u8 TX_I2C_Write(u8 reg, u8 *buf);
 __TX_EXT__ u8 TX_I2C_Read(u8 reg, u8 *buf);
+__TX_EXT__ void Adjust_XTAL(u8 value);
 
 #define TX_WriteID(id) (TX_I2C_WriteReg(0x38, id))
 
