@@ -118,7 +118,8 @@ void KEY_Scan(void)
             Flash_LED(LED_GREEN, 200, USER_DATA.rUserFreqIndex, FOLLOW_PREVIOUS);
             break;
         case EVENT_DOUBLE_CLICK:
-            SwitchPrevFreq();
+            // SwitchPrevFreq();
+            TX_Trigger();
             Flash_LED(LED_GREEN, 200, USER_DATA.rUserFreqIndex, FOLLOW_PREVIOUS);
             break;
         case EVENT_LONG_CLICK:
