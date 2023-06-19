@@ -1,4 +1,7 @@
 #include "syscall.h"
+#include "usart.h"
+#include <errno.h>
+#include <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
 
 vs8 keypress_remain = 0;
 

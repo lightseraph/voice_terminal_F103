@@ -64,6 +64,9 @@ void Error_Handler(void);
 #define FREQ_Pin GPIO_PIN_0
 #define FREQ_GPIO_Port GPIOB
 #define FREQ_EXTI_IRQn EXTI0_IRQn
+#define SW_Pin GPIO_PIN_1
+#define SW_GPIO_Port GPIOB
+#define SW_EXTI_IRQn EXTI1_IRQn
 #define CE_Pin GPIO_PIN_13
 #define CE_GPIO_Port GPIOB
 #define LED_GREEN_Pin GPIO_PIN_4
