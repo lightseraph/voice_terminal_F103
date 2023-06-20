@@ -82,7 +82,7 @@ typedef struct
 #define PAIR_FREQ_CHA 7700 // A通道对频频点
 #define PAIR_FREQ_CHB 7490 // B通道对频频点
 
-#define FREQ_NUM 7  // 工作频点数量
+#define FREQ_NUM 4  // 工作频点数量
 #define FREQ_STEP 3 // 工作频点间隔
 
 #define START_FREQ_CHA 6400 // A通道起始频点
@@ -90,7 +90,7 @@ typedef struct
 
 #define USE_I2S_AUDOI 1          // 0 - 使用MIC作为音源, 1 - 使用I2S音源
 #define USE_BK9524_IR_FUNCTION 0 // 0 - 关闭BK9524红外码输出功能, 1 - 使能BK9524红外码输出功能
-#define DEFAULT_FREQ 7           // 启动默认频点
+#define DEFAULT_FREQ 2           // 启动默认频点
 
 #if USE_BK9524_IR_FUNCTION
 /*

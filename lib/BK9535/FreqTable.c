@@ -17,7 +17,7 @@ unsigned int FreqTableA[] = {
     (START_FREQ_CHA + (FREQ_STEP * 7)),
     (START_FREQ_CHA + (FREQ_STEP * 8)),
     (START_FREQ_CHA + (FREQ_STEP * 9)), */
-    6418, 6481, 6568, 6595, 6646, 6754, 6922};
+    6481, 6568, 6754, 6922};
 
 // B通道频点表
 unsigned int FreqTableB[] = {
