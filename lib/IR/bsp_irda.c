@@ -1,7 +1,7 @@
 
 #include "bsp_irda.h"
 
-// uC/OS-II header file
+
 #include "includes.h"
 
 // STM32 stdPri lib
