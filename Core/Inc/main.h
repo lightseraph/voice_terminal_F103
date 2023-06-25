@@ -77,6 +77,12 @@ void Error_Handler(void);
 #define I2C_SCL_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+  // 定义当前设备模式
+
+#define DEVICE_MODE_MOBILE      1
+#define DEVICE_MODE_IRDA_SEND   0
+#define DEVICE_MODE_MATRIX      0
+  
   // 定义一些常用的数据类型短关键字
 
   typedef const int32_t sc32;

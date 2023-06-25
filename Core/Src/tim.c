@@ -22,6 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 
+#include "bsp_irda.h"
+
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim3;
@@ -211,5 +213,32 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 }
 
 /* USER CODE BEGIN 1 */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+  static IrDA_t irda_data[2];
+  uint8_t idx = 0;
+  
+  if(__HAL_TIM_GET_FLAG(htim,TIM_FLAG_UPDATE) != RESET)
+    {
+        for(idx = 0; idx < 2; ++idx)
+        {
+            if(irda_data[idx].IrDA_FMS == IRDA_FMS_WAITLEADER) continue;
 
+            irda_data[idx].fsm_recv_idle_time += (TIM_IC_PERIOD_US / 1000);
+
+            if(irda_data[idx].fsm_recv_idle_time >= 20)
+                bsp_irda_post_data(&irda_data[idx]);
+        }
+    }
+  
+  if(__HAL_TIM_GET_FLAG(htim,TIM_FLAG_CC1) != RESET)
+  {
+    Bsp_Irda_Calc(&htim3, 1, &irda_data[0]);
+  }
+
+  if(__HAL_TIM_GET_FLAG(htim,TIM_FLAG_CC2) != RESET)
+  {
+    Bsp_Irda_Calc(&htim3, 2, &irda_data[1]);
+  }
+}
 /* USER CODE END 1 */
