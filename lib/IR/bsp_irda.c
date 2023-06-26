@@ -1,8 +1,4 @@
 #include "bsp_irda.h"
-#include "tim.h"
-// STM32 stdPri lib
-#include "stm32f1xx_hal_gpio.h"
-#include "stm32f1xx_hal_tim.h"
 
 #if DEVICE_MODE_IRDA_SEND
 
@@ -11,7 +7,8 @@
 void Bsp_Irda_PostData(IrDA_t *pdata)
 {
     if(pdata->IrDA_Data > 0)
-        
+        printf("%x",pdata->IrDA_Data);
+
     pdata->IrDA_FMS           = IRDA_FMS_WAITLEADER;
     pdata->IrDA_Data          = 0;
     pdata->IrDA_Data_Cnt      = 0;
@@ -21,7 +18,7 @@ void Bsp_Irda_PostData(IrDA_t *pdata)
 
 void Bsp_Irda_Calc(TIM_HandleTypeDef *htim , uint8_t channelx, IrDA_t *pdata)
 {   
-    TIM_IC_InitTypeDef sConfigIC = {0 , TIM_ICSELECTION_DIRECTTI , TIM_ICPSC_DIV1 , 0};
+    TIM_IC_InitTypeDef transConfigIC = {0 , TIM_ICSELECTION_DIRECTTI , TIM_ICPSC_DIV1 , 0};
 
     if(pdata->ic_polarity == 0)
     {
@@ -30,13 +27,13 @@ void Bsp_Irda_Calc(TIM_HandleTypeDef *htim , uint8_t channelx, IrDA_t *pdata)
         switch(channelx) //记录捕获时刻TIMx_CNT的值
         {
             case 1: pdata->ic_start = __HAL_TIM_GET_COUNTER(htim); 
-                    sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
-                    HAL_TIM_IC_ConfigChannel(&htim, &sConfigIC, TIM_CHANNEL_1);
+                    transConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+                    HAL_TIM_IC_ConfigChannel(&htim, &transConfigIC, TIM_CHANNEL_1);
                     break;
 
             case 2: pdata->ic_start = __HAL_TIM_GET_COUNTER(htim); 
-                    sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
-                    HAL_TIM_IC_ConfigChannel(&htim, &sConfigIC, TIM_CHANNEL_2);
+                    transConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+                    HAL_TIM_IC_ConfigChannel(&htim, &transConfigIC, TIM_CHANNEL_2);
                     break;
 
             default: break;
@@ -49,13 +46,13 @@ void Bsp_Irda_Calc(TIM_HandleTypeDef *htim , uint8_t channelx, IrDA_t *pdata)
         switch(channelx)//记录捕获时刻TIMx_CNT的值
         {
             case 1: pdata->ic_start = __HAL_TIM_GET_COUNTER(htim); 
-                    sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
-                    HAL_TIM_IC_ConfigChannel(&htim, &sConfigIC, TIM_CHANNEL_1);
+                    transConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+                    HAL_TIM_IC_ConfigChannel(&htim, &transConfigIC, TIM_CHANNEL_1);
                     break;
 
             case 2: pdata->ic_start = __HAL_TIM_GET_COUNTER(htim); 
-                    sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
-                    HAL_TIM_IC_ConfigChannel(&htim, &sConfigIC, TIM_CHANNEL_2);
+                    transConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+                    HAL_TIM_IC_ConfigChannel(&htim, &transConfigIC, TIM_CHANNEL_2);
                     break;
 
             default: break;
