@@ -1,4 +1,5 @@
 #include "bsp_irda.h"
+#include "tim.h"
 
 #if DEVICE_MODE_IRDA_SEND
 
@@ -7,7 +8,7 @@
 void Bsp_Irda_PostData(IrDA_t *pdata)
 {
     if(pdata->IrDA_Data > 0)
-        printf("%x",pdata->IrDA_Data);
+        printf("%ld\n",pdata->IrDA_Data);
 
     pdata->IrDA_FMS           = IRDA_FMS_WAITLEADER;
     pdata->IrDA_Data          = 0;
@@ -28,12 +29,12 @@ void Bsp_Irda_Calc(TIM_HandleTypeDef *htim , uint8_t channelx, IrDA_t *pdata)
         {
             case 1: pdata->ic_start = __HAL_TIM_GET_COUNTER(htim); 
                     transConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
-                    HAL_TIM_IC_ConfigChannel(&htim, &transConfigIC, TIM_CHANNEL_1);
+                    HAL_TIM_IC_ConfigChannel(htim, &transConfigIC, TIM_CHANNEL_1);
                     break;
 
             case 2: pdata->ic_start = __HAL_TIM_GET_COUNTER(htim); 
                     transConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
-                    HAL_TIM_IC_ConfigChannel(&htim, &transConfigIC, TIM_CHANNEL_2);
+                    HAL_TIM_IC_ConfigChannel(htim, &transConfigIC, TIM_CHANNEL_2);
                     break;
 
             default: break;
@@ -47,12 +48,12 @@ void Bsp_Irda_Calc(TIM_HandleTypeDef *htim , uint8_t channelx, IrDA_t *pdata)
         {
             case 1: pdata->ic_start = __HAL_TIM_GET_COUNTER(htim); 
                     transConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
-                    HAL_TIM_IC_ConfigChannel(&htim, &transConfigIC, TIM_CHANNEL_1);
+                    HAL_TIM_IC_ConfigChannel(htim, &transConfigIC, TIM_CHANNEL_1);
                     break;
 
             case 2: pdata->ic_start = __HAL_TIM_GET_COUNTER(htim); 
                     transConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
-                    HAL_TIM_IC_ConfigChannel(&htim, &transConfigIC, TIM_CHANNEL_2);
+                    HAL_TIM_IC_ConfigChannel(htim, &transConfigIC, TIM_CHANNEL_2);
                     break;
 
             default: break;
@@ -95,7 +96,7 @@ void Bsp_Irda_Calc(TIM_HandleTypeDef *htim , uint8_t channelx, IrDA_t *pdata)
 
             // exit the recv status
             if(pdata->IrDA_Data_Cnt >= 32)
-                bsp_irda_post_data(pdata);
+                Bsp_Irda_PostData(pdata);
         }
         else
         {

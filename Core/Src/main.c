@@ -27,6 +27,7 @@
 #include "bk9535.h"
 #include "syscall.h"
 #include "key.h"
+#include "bsp_irda.h"
 #include "config.h"
 /* USER CODE END Includes */
 

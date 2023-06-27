@@ -22,10 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 
-#include "bsp_irda.h"
-
 uint8_t ic_period_count = 0;
-IrDA_t irda_data[2];
+IrDA_t irda_data[2] = {0};
 
 /* USER CODE END 0 */
 
@@ -227,7 +225,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       irda_data[idx].fsm_recv_idle_time += (TIM_IC_PERIOD_US / 1000);
 
       if(irda_data[idx].fsm_recv_idle_time >= 20)
-        bsp_irda_post_data(&irda_data[idx]);
+        Bsp_Irda_PostData(&irda_data[idx]);
     }
   }
 }

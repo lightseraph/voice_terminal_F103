@@ -2,7 +2,6 @@
 #define __BSP_IRDA_H_
 
 #include "main.h"
-#include "tim.h"
 
 #if DEVICE_MODE_IRDA_SEND
 
