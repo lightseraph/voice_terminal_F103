@@ -115,11 +115,12 @@ void KEY_Scan(void)
         {
         case EVENT_SHORT_CLICK:
             SwitchNextFreq();
+            TX_Reset_Chip();
             Flash_LED(LED_GREEN, 200, USER_DATA.rUserFreqIndex, FOLLOW_PREVIOUS);
             break;
         case EVENT_DOUBLE_CLICK:
-            // SwitchPrevFreq();
-            TX_Trigger();
+            SwitchPrevFreq();
+            TX_Reset_Chip();
             Flash_LED(LED_GREEN, 200, USER_DATA.rUserFreqIndex, FOLLOW_PREVIOUS);
             break;
         case EVENT_LONG_CLICK:
