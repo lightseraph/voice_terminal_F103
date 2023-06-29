@@ -2,6 +2,7 @@
 #include "usart.h"
 #include <errno.h>
 #include <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
+#include "tim.h"
 
 vs8 keypress_remain = 0;
 
@@ -67,4 +68,13 @@ int _write(int file, char *data, int len)
 
     // return # of bytes written - as best we can tell
     return (status == HAL_OK ? len : 0);
+}
+
+void IR_delay(uint16_t num)
+{
+    __HAL_TIM_SET_COUNTER(&htim2, 0); // 将装载值计0
+    HAL_TIM_Base_Start(&htim2);       // 开始计数
+    while (__HAL_TIM_GetCounter(&htim2) < num)
+        ;                      // 当装载值小于预设值时循环
+    HAL_TIM_Base_Stop(&htim2); // 结束延时
 }

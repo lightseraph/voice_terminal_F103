@@ -4,6 +4,7 @@ uint8_t g_remote_sta = 0;
 uint32_t g_remote_data = 0; /* 红外接收到的数据 */
 uint8_t g_remote_cnt = 0;   /* 按键按下的次数 */
 uint8_t g_valid_channel = 0;
+const uint8_t REMOTE_ID = 0xBF;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
