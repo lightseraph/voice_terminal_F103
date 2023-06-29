@@ -12,6 +12,7 @@
 #define EVENT_SHORT_CLICK 0x01  // 短按
 #define EVENT_DOUBLE_CLICK 0x02 // 连击
 #define EVENT_LONG_CLICK 0x03   // 长按
+#define EVENT_MORE_CLICK 0x04   // 多次连击
 
 // 按键状态
 #define KEY_STATE_IDLE 0x00    // 空闲

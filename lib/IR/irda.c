@@ -77,7 +77,7 @@ uint8_t remote_scan(void)
         t1 = g_remote_data;               /* 得到地址码 */
         t2 = (g_remote_data >> 8) & 0xff; /* 得到地址反码 */
 
-        if ((t1 == (uint8_t)~t2) && t1 == REMOTE_ID) /* 检验遥控识别码(ID)及地址 */
+        if ((t1 == (uint8_t)~t2) && t1 == LOCAL_ID[local_id]) /* 检验遥控识别码(ID)及地址 */
         {
             t1 = (g_remote_data >> 16) & 0xff;
             t2 = (g_remote_data >> 24) & 0xff;

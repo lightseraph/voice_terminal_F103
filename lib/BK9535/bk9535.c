@@ -3,6 +3,7 @@
 #include "bk9535.h"
 #include "syscall.h"
 #include <stdlib.h>
+#include "stmflash.h"
 
 // TX初始化表格。
 unsigned char tx_reg_val[37][5] =
@@ -220,6 +221,8 @@ void SwitchNextFreq(void)
         USER_DATA.rUserFreqIndex++;
     }
     SwitchFreqByIndex(USER_DATA.rUserFreqIndex);
+    uint16_t temp = (uint16_t)USER_DATA.rUserFreqIndex;
+    stmflash_write(FLASH_SAVE_ADDR, &temp, 2);
 }
 
 // 切到上一个频点
@@ -234,6 +237,8 @@ void SwitchPrevFreq(void)
         USER_DATA.rUserFreqIndex--;
     }
     SwitchFreqByIndex(USER_DATA.rUserFreqIndex);
+    uint16_t temp = (uint16_t)USER_DATA.rUserFreqIndex;
+    stmflash_write(FLASH_SAVE_ADDR, &temp, 2);
 }
 
 // 写寄存器

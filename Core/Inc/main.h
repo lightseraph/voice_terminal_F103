@@ -23,7 +23,8 @@
 #define __MAIN_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -32,28 +33,28 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-/* USER CODE END Includes */
+  /* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
+  /* Exported types ------------------------------------------------------------*/
+  /* USER CODE BEGIN ET */
 
-/* USER CODE END ET */
+  /* USER CODE END ET */
 
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
+  /* Exported constants --------------------------------------------------------*/
+  /* USER CODE BEGIN EC */
 
-/* USER CODE END EC */
+  /* USER CODE END EC */
 
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
+  /* Exported macro ------------------------------------------------------------*/
+  /* USER CODE BEGIN EM */
 
-/* USER CODE END EM */
+  /* USER CODE END EM */
 
-/* Exported functions prototypes ---------------------------------------------*/
-void Error_Handler(void);
+  /* Exported functions prototypes ---------------------------------------------*/
+  void Error_Handler(void);
 
-/* USER CODE BEGIN EFP */
-
+  /* USER CODE BEGIN EFP */
+  void Init_Param(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -76,13 +77,17 @@ void Error_Handler(void);
 #define I2C_SCL_Pin GPIO_PIN_7
 #define I2C_SCL_GPIO_Port GPIOB
 
-/* USER CODE BEGIN Private defines */
+  extern const uint8_t LOCAL_ID[16];
+  extern uint16_t param_inFlash;
+  extern uint8_t local_id;
+
+  /* USER CODE BEGIN Private defines */
   // 定义当前设备模式
 
-#define DEVICE_MODE_MOBILE      1
-#define DEVICE_MODE_IRDA_SEND   0
-#define DEVICE_MODE_MATRIX      0
-  
+#define DEVICE_MODE_MOBILE 1
+#define DEVICE_MODE_IRDA_SEND 0
+#define DEVICE_MODE_MATRIX 0
+
   // 定义一些常用的数据类型短关键字
 
   typedef const int32_t sc32;
@@ -114,7 +119,7 @@ void Error_Handler(void);
   typedef __I uint8_t vuc8;
 
   extern vu32 time_delay;
-/* USER CODE END Private defines */
+  /* USER CODE END Private defines */
 
 #ifdef __cplusplus
 }

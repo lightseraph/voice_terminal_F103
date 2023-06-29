@@ -9,8 +9,8 @@ void IR_PostData(uint8_t data)
     IR_LOW(4500);
     IR_HIGH(560);
 
-    Send_ByteData(REMOTE_ID);
-    Send_ByteData(~REMOTE_ID);
+    Send_ByteData(LOCAL_ID[local_id]);
+    Send_ByteData(~LOCAL_ID[local_id]);
     Send_ByteData(data);
     Send_ByteData(~data);
     HAL_GPIO_WritePin(IR_GPIO_Port, IR_Pin, RESET);

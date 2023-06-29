@@ -3,6 +3,7 @@
 #include "tim.h"
 #include "syscall.h"
 #include <stdio.h>
+#include "stmflash.h"
 
 KEY_PROCESS_TypeDef key;
 
@@ -80,6 +81,8 @@ void KEY_Process(void)
                 if (key.press_cnt > 1)
                 {                                                // 连击事件
                     key.event_current_type = EVENT_DOUBLE_CLICK; // 分配按键事件类型
+                    if (key.press_cnt > 4)
+                        key.event_current_type = EVENT_MORE_CLICK;
                 }
                 else
                 {                                               // 单击事件
@@ -122,6 +125,10 @@ void KEY_Scan(void)
             SwitchPrevFreq();
             TX_Reset_Chip();
             Flash_LED(LED_GREEN, 200, USER_DATA.rUserFreqIndex, FOLLOW_PREVIOUS);
+            break;
+        case EVENT_MORE_CLICK:
+            Init_Param();
+            Flash_LED(LED_GREEN, 1000, 3, FOLLOW_PREVIOUS);
             break;
         case EVENT_LONG_CLICK:
             HAL_GPIO_TogglePin(CE_GPIO_Port, CE_Pin);
