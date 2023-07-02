@@ -1,23 +1,23 @@
 /**
  ****************************************************************************************************
  * @file        stmflash.c
- * @author      ÕıµãÔ­×ÓÍÅ¶Ó(ALIENTEK)
+ * @author      æ­£ç‚¹åŸå­å›¢é˜Ÿ(ALIENTEK)
  * @version     V1.0
  * @date        2020-04-26
- * @brief       STM32ÄÚ²¿FLASH¶ÁĞ´ Çı¶¯´úÂë
- * @license     Copyright (c) 2020-2032, ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾
+ * @brief       STM32å†…éƒ¨FLASHè¯»å†™ é©±åŠ¨ä»£ç 
+ * @license     Copyright (c) 2020-2032, å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸
  ****************************************************************************************************
  * @attention
  *
- * ÊµÑéÆ½Ì¨:ÕıµãÔ­×Ó MiniSTM32 V4¿ª·¢°å
- * ÔÚÏßÊÓÆµ:www.yuanzige.com
- * ¼¼ÊõÂÛÌ³:www.openedv.com
- * ¹«Ë¾ÍøÖ·:www.alientek.com
- * ¹ºÂòµØÖ·:openedv.taobao.com
+ * å®éªŒå¹³å°:æ­£ç‚¹åŸå­ MiniSTM32 V4å¼€å‘æ¿
+ * åœ¨çº¿è§†é¢‘:www.yuanzige.com
+ * æŠ€æœ¯è®ºå›:www.openedv.com
+ * å…¬å¸ç½‘å€:www.alientek.com
+ * è´­ä¹°åœ°å€:openedv.taobao.com
  *
- * ĞŞ¸ÄËµÃ÷
+ * ä¿®æ”¹è¯´æ˜
  * V1.0 20200426
- * µÚÒ»´Î·¢²¼
+ * ç¬¬ä¸€æ¬¡å‘å¸ƒ
  *
  ****************************************************************************************************
  */
@@ -26,9 +26,9 @@
 #include "stmflash.h"
 
 /**
- * @brief       ´ÓÖ¸¶¨µØÖ·¶ÁÈ¡Ò»¸ö°ë×Ö (16Î»Êı¾İ)
- * @param       faddr   : ¶ÁÈ¡µØÖ· (´ËµØÖ·±ØĞëÎª2µÄ±¶Êı!!)
- * @retval      ¶ÁÈ¡µ½µÄÊı¾İ (16Î»)
+ * @brief       ä»æŒ‡å®šåœ°å€è¯»å–ä¸€ä¸ªåŠå­— (16ä½æ•°æ®)
+ * @param       faddr   : è¯»å–åœ°å€ (æ­¤åœ°å€å¿…é¡»ä¸º2çš„å€æ•°!!)
+ * @retval      è¯»å–åˆ°çš„æ•°æ® (16ä½)
  */
 uint16_t stmflash_read_halfword(uint32_t faddr)
 {
@@ -36,11 +36,11 @@ uint16_t stmflash_read_halfword(uint32_t faddr)
 }
 
 /**
- * @brief       ´ÓÖ¸¶¨µØÖ·¿ªÊ¼¶Á³öÖ¸¶¨³¤¶ÈµÄÊı¾İ
- * @param       raddr : ÆğÊ¼µØÖ·
- * @param       pbuf  : Êı¾İÖ¸Õë
- * @param       length: Òª¶ÁÈ¡µÄ°ë×Ö(16Î»)Êı,¼´2¸ö×Ö½ÚµÄÕûÊı±¶
- * @retval      ÎŞ
+ * @brief       ä»æŒ‡å®šåœ°å€å¼€å§‹è¯»å‡ºæŒ‡å®šé•¿åº¦çš„æ•°æ®
+ * @param       raddr : èµ·å§‹åœ°å€
+ * @param       pbuf  : æ•°æ®æŒ‡é’ˆ
+ * @param       length: è¦è¯»å–çš„åŠå­—(16ä½)æ•°,å³2ä¸ªå­—èŠ‚çš„æ•´æ•°å€
+ * @retval      æ— 
  */
 void stmflash_read(uint32_t raddr, uint16_t *pbuf, uint16_t length)
 {
@@ -48,18 +48,18 @@ void stmflash_read(uint32_t raddr, uint16_t *pbuf, uint16_t length)
 
     for (i = 0; i < length; i++)
     {
-        pbuf[i] = stmflash_read_halfword(raddr); /* ¶ÁÈ¡2¸ö×Ö½Ú */
-        raddr += 2;                              /* Æ«ÒÆ2¸ö×Ö½Ú */
+        pbuf[i] = stmflash_read_halfword(raddr); /* è¯»å–2ä¸ªå­—èŠ‚ */
+        raddr += 2;                              /* åç§»2ä¸ªå­—èŠ‚ */
     }
 }
 
 /**
- * @brief       ²»¼ì²éµÄĞ´Èë
-                Õâ¸öº¯ÊıµÄ¼ÙÉèÒÑ¾­°ÑÔ­À´µÄÉÈÇø²Á³ı¹ıÔÙĞ´Èë
- * @param       waddr   : ÆğÊ¼µØÖ· (´ËµØÖ·±ØĞëÎª2µÄ±¶Êı!!,·ñÔòĞ´Èë³ö´í!)
- * @param       pbuf    : Êı¾İÖ¸Õë
- * @param       length  : ÒªĞ´ÈëµÄ °ë×Ö(16Î»)Êı
- * @retval      ÎŞ
+ * @brief       ä¸æ£€æŸ¥çš„å†™å…¥
+                è¿™ä¸ªå‡½æ•°çš„å‡è®¾å·²ç»æŠŠåŸæ¥çš„æ‰‡åŒºæ“¦é™¤è¿‡å†å†™å…¥
+ * @param       waddr   : èµ·å§‹åœ°å€ (æ­¤åœ°å€å¿…é¡»ä¸º2çš„å€æ•°!!,å¦åˆ™å†™å…¥å‡ºé”™!)
+ * @param       pbuf    : æ•°æ®æŒ‡é’ˆ
+ * @param       length  : è¦å†™å…¥çš„ åŠå­—(16ä½)æ•°
+ * @retval      æ— 
  */
 void stmflash_write_nocheck(uint32_t waddr, uint16_t *pbuf, uint16_t length)
 {
@@ -67,111 +67,111 @@ void stmflash_write_nocheck(uint32_t waddr, uint16_t *pbuf, uint16_t length)
     for (i = 0; i < length; i++)
     {
         HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, waddr, pbuf[i]);
-        waddr += 2; /* Ö¸ÏòÏÂÒ»¸ö°ë×Ö */
+        waddr += 2; /* æŒ‡å‘ä¸‹ä¸€ä¸ªåŠå­— */
     }
 }
 
 /**
- * @brief       ÔÚFLASH Ö¸¶¨Î»ÖÃ, Ğ´ÈëÖ¸¶¨³¤¶ÈµÄÊı¾İ(×Ô¶¯²Á³ı)
- *   @note      ¸Ãº¯ÊıÍù STM32 ÄÚ²¿ FLASH Ö¸¶¨Î»ÖÃĞ´ÈëÖ¸¶¨³¤¶ÈµÄÊı¾İ
- *              ¸Ãº¯Êı»áÏÈ¼ì²âÒªĞ´ÈëµÄÉÈÇøÊÇ·ñÊÇ¿Õ(È«0XFFFF)µÄ?, Èç¹û
- *              ²»ÊÇ, ÔòÏÈ²Á³ı, Èç¹ûÊÇ, ÔòÖ±½ÓÍùÉÈÇøÀïÃæĞ´ÈëÊı¾İ.
- *              Êı¾İ³¤¶È²»×ãÉÈÇøÊ±£¬×Ô¶¯±»»Ø²Á³ıÇ°µÄÊı¾İ
- * @param       waddr   : ÆğÊ¼µØÖ· (´ËµØÖ·±ØĞëÎª2µÄ±¶Êı!!,·ñÔòĞ´Èë³ö´í!)
- * @param       pbuf    : Êı¾İÖ¸Õë
- * @param       length  : ÒªĞ´ÈëµÄ °ë×Ö(16Î»)Êı
- * @retval      ÎŞ
+ * @brief       åœ¨FLASH æŒ‡å®šä½ç½®, å†™å…¥æŒ‡å®šé•¿åº¦çš„æ•°æ®(è‡ªåŠ¨æ“¦é™¤)
+ *   @note      è¯¥å‡½æ•°å¾€ STM32 å†…éƒ¨ FLASH æŒ‡å®šä½ç½®å†™å…¥æŒ‡å®šé•¿åº¦çš„æ•°æ®
+ *              è¯¥å‡½æ•°ä¼šå…ˆæ£€æµ‹è¦å†™å…¥çš„æ‰‡åŒºæ˜¯å¦æ˜¯ç©º(å…¨0XFFFF)çš„?, å¦‚æœ
+ *              ä¸æ˜¯, åˆ™å…ˆæ“¦é™¤, å¦‚æœæ˜¯, åˆ™ç›´æ¥å¾€æ‰‡åŒºé‡Œé¢å†™å…¥æ•°æ®.
+ *              æ•°æ®é•¿åº¦ä¸è¶³æ‰‡åŒºæ—¶ï¼Œè‡ªåŠ¨è¢«å›æ“¦é™¤å‰çš„æ•°æ®
+ * @param       waddr   : èµ·å§‹åœ°å€ (æ­¤åœ°å€å¿…é¡»ä¸º2çš„å€æ•°!!,å¦åˆ™å†™å…¥å‡ºé”™!)
+ * @param       pbuf    : æ•°æ®æŒ‡é’ˆ
+ * @param       length  : è¦å†™å…¥çš„ åŠå­—(16ä½)æ•°
+ * @retval      æ— 
  */
-uint16_t g_flashbuf[STM32_SECTOR_SIZE / 2]; /* ×î¶àÊÇ2K×Ö½Ú */
+uint16_t g_flashbuf[STM32_SECTOR_SIZE / 2]; /* æœ€å¤šæ˜¯2Kå­—èŠ‚ */
 void stmflash_write(uint32_t waddr, uint16_t *pbuf, uint16_t length)
 {
-    uint32_t secpos;    /* ÉÈÇøµØÖ· */
-    uint16_t secoff;    /* ÉÈÇøÄÚÆ«ÒÆµØÖ·(16Î»×Ö¼ÆËã) */
-    uint16_t secremain; /* ÉÈÇøÄÚÊ£ÓàµØÖ·(16Î»×Ö¼ÆËã) */
+    uint32_t secpos;    /* æ‰‡åŒºåœ°å€ */
+    uint16_t secoff;    /* æ‰‡åŒºå†…åç§»åœ°å€(16ä½å­—è®¡ç®—) */
+    uint16_t secremain; /* æ‰‡åŒºå†…å‰©ä½™åœ°å€(16ä½å­—è®¡ç®—) */
     uint16_t i;
-    uint32_t offaddr; /* È¥µô0X08000000ºóµÄµØÖ· */
+    uint32_t offaddr; /* å»æ‰0X08000000åçš„åœ°å€ */
     FLASH_EraseInitTypeDef flash_eraseop;
-    uint32_t erase_addr; /* ²Á³ı´íÎó£¬Õâ¸öÖµÎª·¢Éú´íÎóµÄÉÈÇøµØÖ· */
+    uint32_t erase_addr; /* æ“¦é™¤é”™è¯¯ï¼Œè¿™ä¸ªå€¼ä¸ºå‘ç”Ÿé”™è¯¯çš„æ‰‡åŒºåœ°å€ */
 
     if (waddr < STM32_FLASH_BASE || (waddr >= (STM32_FLASH_BASE + 1024 * STM32_FLASH_SIZE)))
     {
-        return; /* ·Ç·¨µØÖ· */
+        return; /* éæ³•åœ°å€ */
     }
 
-    HAL_FLASH_Unlock(); /* FLASH½âËø */
+    HAL_FLASH_Unlock(); /* FLASHè§£é” */
 
-    offaddr = waddr - STM32_FLASH_BASE;         /* Êµ¼ÊÆ«ÒÆµØÖ·. */
-    secpos = offaddr / STM32_SECTOR_SIZE;       /* ÉÈÇøµØÖ·  0~127 for STM32F103RBT6 */
-    secoff = (offaddr % STM32_SECTOR_SIZE) / 2; /* ÔÚÉÈÇøÄÚµÄÆ«ÒÆ(2¸ö×Ö½ÚÎª»ù±¾µ¥Î».) */
-    secremain = STM32_SECTOR_SIZE / 2 - secoff; /* ÉÈÇøÊ£Óà¿Õ¼ä´óĞ¡ */
+    offaddr = waddr - STM32_FLASH_BASE;         /* å®é™…åç§»åœ°å€. */
+    secpos = offaddr / STM32_SECTOR_SIZE;       /* æ‰‡åŒºåœ°å€  0~127 for STM32F103RBT6 */
+    secoff = (offaddr % STM32_SECTOR_SIZE) / 2; /* åœ¨æ‰‡åŒºå†…çš„åç§»(2ä¸ªå­—èŠ‚ä¸ºåŸºæœ¬å•ä½.) */
+    secremain = STM32_SECTOR_SIZE / 2 - secoff; /* æ‰‡åŒºå‰©ä½™ç©ºé—´å¤§å° */
     if (length <= secremain)
     {
-        secremain = length; /* ²»´óÓÚ¸ÃÉÈÇø·¶Î§ */
+        secremain = length; /* ä¸å¤§äºè¯¥æ‰‡åŒºèŒƒå›´ */
     }
 
     while (1)
     {
-        stmflash_read(secpos * STM32_SECTOR_SIZE + STM32_FLASH_BASE, g_flashbuf, STM32_SECTOR_SIZE / 2); /* ¶Á³öÕû¸öÉÈÇøµÄÄÚÈİ */
-        for (i = 0; i < secremain; i++)                                                                  /* Ğ£ÑéÊı¾İ */
+        stmflash_read(secpos * STM32_SECTOR_SIZE + STM32_FLASH_BASE, g_flashbuf, STM32_SECTOR_SIZE / 2); /* è¯»å‡ºæ•´ä¸ªæ‰‡åŒºçš„å†…å®¹ */
+        for (i = 0; i < secremain; i++)                                                                  /* æ ¡éªŒæ•°æ® */
         {
             if (g_flashbuf[secoff + i] != 0XFFFF)
             {
-                break; /* ĞèÒª²Á³ı */
+                break; /* éœ€è¦æ“¦é™¤ */
             }
         }
-        if (i < secremain) /* ĞèÒª²Á³ı */
+        if (i < secremain) /* éœ€è¦æ“¦é™¤ */
         {
-            flash_eraseop.TypeErase = FLASH_TYPEERASE_PAGES; /* Ñ¡ÔñÃæ²Á³ı */
+            flash_eraseop.TypeErase = FLASH_TYPEERASE_PAGES; /* é€‰æ‹©é¢æ“¦é™¤ */
             flash_eraseop.Banks = FLASH_BANK_1;
             flash_eraseop.NbPages = 1;
-            flash_eraseop.PageAddress = secpos * STM32_SECTOR_SIZE + STM32_FLASH_BASE; /* Òª²Á³ıµÄÉÈÇø */
+            flash_eraseop.PageAddress = secpos * STM32_SECTOR_SIZE + STM32_FLASH_BASE; /* è¦æ“¦é™¤çš„æ‰‡åŒº */
             HAL_FLASHEx_Erase(&flash_eraseop, &erase_addr);
 
-            for (i = 0; i < secremain; i++) /* ¸´ÖÆ */
+            for (i = 0; i < secremain; i++) /* å¤åˆ¶ */
             {
                 g_flashbuf[i + secoff] = pbuf[i];
             }
-            stmflash_write_nocheck(secpos * STM32_SECTOR_SIZE + STM32_FLASH_BASE, g_flashbuf, STM32_SECTOR_SIZE / 2); /* Ğ´ÈëÕû¸öÉÈÇø */
+            stmflash_write_nocheck(secpos * STM32_SECTOR_SIZE + STM32_FLASH_BASE, g_flashbuf, STM32_SECTOR_SIZE / 2); /* å†™å…¥æ•´ä¸ªæ‰‡åŒº */
         }
         else
         {
-            stmflash_write_nocheck(waddr, pbuf, secremain); /* Ğ´ÒÑ¾­²Á³ıÁËµÄ,Ö±½ÓĞ´ÈëÉÈÇøÊ£ÓàÇø¼ä. */
+            stmflash_write_nocheck(waddr, pbuf, secremain); /* å†™å·²ç»æ“¦é™¤äº†çš„,ç›´æ¥å†™å…¥æ‰‡åŒºå‰©ä½™åŒºé—´. */
         }
         if (length == secremain)
         {
-            break; /* Ğ´Èë½áÊøÁË */
+            break; /* å†™å…¥ç»“æŸäº† */
         }
-        else /* Ğ´ÈëÎ´½áÊø */
+        else /* å†™å…¥æœªç»“æŸ */
         {
-            secpos++;               /* ÉÈÇøµØÖ·Ôö1 */
-            secoff = 0;             /* Æ«ÒÆÎ»ÖÃÎª0 */
-            pbuf += secremain;      /* Ö¸ÕëÆ«ÒÆ */
-            waddr += secremain * 2; /* Ğ´µØÖ·Æ«ÒÆ(16Î»Êı¾İµØÖ·,ĞèÒª*2) */
-            length -= secremain;    /* ×Ö½Ú(16Î»)Êıµİ¼õ */
+            secpos++;               /* æ‰‡åŒºåœ°å€å¢1 */
+            secoff = 0;             /* åç§»ä½ç½®ä¸º0 */
+            pbuf += secremain;      /* æŒ‡é’ˆåç§» */
+            waddr += secremain * 2; /* å†™åœ°å€åç§»(16ä½æ•°æ®åœ°å€,éœ€è¦*2) */
+            length -= secremain;    /* å­—èŠ‚(16ä½)æ•°é€’å‡ */
             if (length > (STM32_SECTOR_SIZE / 2))
             {
-                secremain = STM32_SECTOR_SIZE / 2; /* ÏÂÒ»¸öÉÈÇø»¹ÊÇĞ´²»Íê */
+                secremain = STM32_SECTOR_SIZE / 2; /* ä¸‹ä¸€ä¸ªæ‰‡åŒºè¿˜æ˜¯å†™ä¸å®Œ */
             }
             else
             {
-                secremain = length; /* ÏÂÒ»¸öÉÈÇø¿ÉÒÔĞ´ÍêÁË */
+                secremain = length; /* ä¸‹ä¸€ä¸ªæ‰‡åŒºå¯ä»¥å†™å®Œäº† */
             }
         }
     }
 
-    HAL_FLASH_Lock(); /* ÉÏËø */
+    HAL_FLASH_Lock(); /* ä¸Šé” */
 }
 
 /******************************************************************************************/
-/* ²âÊÔÓÃ´úÂë */
+/* æµ‹è¯•ç”¨ä»£ç  */
 
 /**
- * @brief       ²âÊÔĞ´Êı¾İ(Ğ´1¸ö×Ö)
- * @param       waddr : ÆğÊ¼µØÖ·
- * @param       wdata : ÒªĞ´ÈëµÄÊı¾İ
- * @retval      ¶ÁÈ¡µ½µÄÊı¾İ
+ * @brief       æµ‹è¯•å†™æ•°æ®(å†™1ä¸ªå­—)
+ * @param       waddr : èµ·å§‹åœ°å€
+ * @param       wdata : è¦å†™å…¥çš„æ•°æ®
+ * @retval      è¯»å–åˆ°çš„æ•°æ®
  */
 void test_write(uint32_t waddr, uint16_t wdata)
 {
-    stmflash_write(waddr, &wdata, 1); /* Ğ´ÈëÒ»¸ö°ë×Ö */
+    stmflash_write(waddr, &wdata, 1); /* å†™å…¥ä¸€ä¸ªåŠå­— */
 }

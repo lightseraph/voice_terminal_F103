@@ -1,23 +1,23 @@
 /**
  ****************************************************************************************************
  * @file        stmflash.h
- * @author      ÕıµãÔ­×ÓÍÅ¶Ó(ALIENTEK)
+ * @author      æ­£ç‚¹åŸå­å›¢é˜Ÿ(ALIENTEK)
  * @version     V1.0
  * @date        2020-04-26
- * @brief       STM32ÄÚ²¿FLASH¶ÁĞ´ Çı¶¯´úÂë
- * @license     Copyright (c) 2020-2032, ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾
+ * @brief       STM32å†…éƒ¨FLASHè¯»å†™ é©±åŠ¨ä»£ç 
+ * @license     Copyright (c) 2020-2032, å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸
  ****************************************************************************************************
  * @attention
  *
- * ÊµÑéÆ½Ì¨:ÕıµãÔ­×Ó STM32F103¿ª·¢°å
- * ÔÚÏßÊÓÆµ:www.yuanzige.com
- * ¼¼ÊõÂÛÌ³:www.openedv.com
- * ¹«Ë¾ÍøÖ·:www.alientek.com
- * ¹ºÂòµØÖ·:openedv.taobao.com
+ * å®éªŒå¹³å°:æ­£ç‚¹åŸå­ STM32F103å¼€å‘æ¿
+ * åœ¨çº¿è§†é¢‘:www.yuanzige.com
+ * æŠ€æœ¯è®ºå›:www.openedv.com
+ * å…¬å¸ç½‘å€:www.alientek.com
+ * è´­ä¹°åœ°å€:openedv.taobao.com
  *
- * ĞŞ¸ÄËµÃ÷
+ * ä¿®æ”¹è¯´æ˜
  * V1.0 20200426
- * µÚÒ»´Î·¢²¼
+ * ç¬¬ä¸€æ¬¡å‘å¸ƒ
  *
  ****************************************************************************************************
  */
@@ -27,37 +27,37 @@
 
 #include "main.h"
 
-/* FLASHÆğÊ¼µØÖ· */
-#define STM32_FLASH_SIZE 0x10000    /* STM32 FLASH ×Ü´óĞ¡ */
-#define STM32_FLASH_BASE 0x08000000 /* STM32 FLASH ÆğÊ¼µØÖ· */
+/* FLASHèµ·å§‹åœ°å€ */
+#define STM32_FLASH_SIZE 0x10000    /* STM32 FLASH æ€»å¤§å° */
+#define STM32_FLASH_BASE 0x08000000 /* STM32 FLASH èµ·å§‹åœ°å€ */
 
-#define FLASH_SAVE_ADDR 0X0800FC00 /*±£ÁôÄ©Î²1K×Ö½Ú×÷Îª´æ´¢*/
+#define FLASH_SAVE_ADDR 0X0800FC00 /*ä¿ç•™æœ«å°¾1Kå­—èŠ‚ä½œä¸ºå­˜å‚¨*/
 
-/* STM32F103 ÉÈÇø´óĞ¡ */
+/* STM32F103 æ‰‡åŒºå¤§å° */
 #if STM32_FLASH_SIZE < 256 * 1024
-#define STM32_SECTOR_SIZE 1024 /* ÈİÁ¿Ğ¡ÓÚ256KµÄ F103, ÉÈÇø´óĞ¡Îª1K×Ö½Ú */
+#define STM32_SECTOR_SIZE 1024 /* å®¹é‡å°äº256Kçš„ F103, æ‰‡åŒºå¤§å°ä¸º1Kå­—èŠ‚ */
 #else
-#define STM32_SECTOR_SIZE 2048 /* ÈİÁ¿´óÓÚµÈÓÚÓÚ256KµÄ F103, ÉÈÇø´óĞ¡Îª2K×Ö½Ú */
+#define STM32_SECTOR_SIZE 2048 /* å®¹é‡å¤§äºç­‰äºäº256Kçš„ F103, æ‰‡åŒºå¤§å°ä¸º2Kå­—èŠ‚ */
 #endif
 
-/* FLASH½âËø¼üÖµ */
+/* FLASHè§£é”é”®å€¼ */
 #define STM32_FLASH_KEY1 0X45670123
 #define STM32_FLASH_KEY2 0XCDEF89AB
 
-/* ¾²Ì¬º¯Êı(½öÏŞstmflash.cµ÷ÓÃ) */
-// static void stmflash_unlock(void);                                     /* ½âËøSTM32 ÄÚ²¿FLASH */
-// static void stmflash_lock(void);                                       /* Ëø¶¨STM32 ÄÚ²¿FLASH */
-// static uint8_t stmflash_get_error_status(void);                        /* »ñÈ¡FLASH´íÎó×´Ì¬ */
-// static uint8_t stmflash_wait_done(uint32_t time);                      /* µÈ´ı²Ù×÷Íê³É */
-// static uint8_t stmflash_erase_sector(uint32_t saddr);                  /* ²Á³ıÉÈÇø */
-// static uint8_t stmflash_write_halfword(uint32_t faddr, uint16_t data); /* FLASHĞ´°ë×Ö */
+/* é™æ€å‡½æ•°(ä»…é™stmflash.cè°ƒç”¨) */
+// static void stmflash_unlock(void);                                     /* è§£é”STM32 å†…éƒ¨FLASH */
+// static void stmflash_lock(void);                                       /* é”å®šSTM32 å†…éƒ¨FLASH */
+// static uint8_t stmflash_get_error_status(void);                        /* è·å–FLASHé”™è¯¯çŠ¶æ€ */
+// static uint8_t stmflash_wait_done(uint32_t time);                      /* ç­‰å¾…æ“ä½œå®Œæˆ */
+// static uint8_t stmflash_erase_sector(uint32_t saddr);                  /* æ“¦é™¤æ‰‡åŒº */
+// static uint8_t stmflash_write_halfword(uint32_t faddr, uint16_t data); /* FLASHå†™åŠå­— */
 
-/* ½Ó¿Úº¯Êı(Íâ²¿¿Éµ÷ÓÃ) */
-uint16_t stmflash_read_halfword(uint32_t faddr);                      /* FLASH¶Á°ë×Ö */
-void stmflash_read(uint32_t raddr, uint16_t *pbuf, uint16_t length);  /* ´ÓÖ¸¶¨µØÖ·¿ªÊ¼¶Á³öÖ¸¶¨³¤¶ÈµÄÊı¾İ */
-void stmflash_write(uint32_t waddr, uint16_t *pbuf, uint16_t length); /* ÔÚFLASH Ö¸¶¨Î»ÖÃ, Ğ´ÈëÖ¸¶¨³¤¶ÈµÄÊı¾İ(×Ô¶¯²Á³ı) */
+/* æ¥å£å‡½æ•°(å¤–éƒ¨å¯è°ƒç”¨) */
+uint16_t stmflash_read_halfword(uint32_t faddr);                      /* FLASHè¯»åŠå­— */
+void stmflash_read(uint32_t raddr, uint16_t *pbuf, uint16_t length);  /* ä»æŒ‡å®šåœ°å€å¼€å§‹è¯»å‡ºæŒ‡å®šé•¿åº¦çš„æ•°æ® */
+void stmflash_write(uint32_t waddr, uint16_t *pbuf, uint16_t length); /* åœ¨FLASH æŒ‡å®šä½ç½®, å†™å…¥æŒ‡å®šé•¿åº¦çš„æ•°æ®(è‡ªåŠ¨æ“¦é™¤) */
 
-/* ²âÊÔº¯Êı */
+/* æµ‹è¯•å‡½æ•° */
 void test_write(uint32_t waddr, uint16_t wdata);
 
 #endif

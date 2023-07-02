@@ -77,10 +77,6 @@ extern "C"
 #define I2C_SCL_Pin GPIO_PIN_7
 #define I2C_SCL_GPIO_Port GPIOB
 
-  extern const uint8_t LOCAL_ID[16];
-  extern uint16_t param_inFlash;
-  extern uint8_t local_id;
-
   /* USER CODE BEGIN Private defines */
   // 定义当前设备模式
 
@@ -119,6 +115,9 @@ extern "C"
   typedef __I uint8_t vuc8;
 
   extern vu32 time_delay;
+  extern const uint8_t LOCAL_ID[16];
+  extern uint16_t param_inFlash;
+  extern uint8_t local_id;
   /* USER CODE END Private defines */
 
 #ifdef __cplusplus
