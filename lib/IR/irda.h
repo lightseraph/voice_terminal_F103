@@ -1,3 +1,6 @@
+#ifndef __IRDA_H
+#define __IRDA_H
+
 #include "main.h"
 #include "tim.h"
 
@@ -19,3 +22,4 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);
 uint8_t remote_scan(void);
 void DataCollect(TIM_HandleTypeDef *htim);
+#endif

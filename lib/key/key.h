@@ -1,3 +1,7 @@
+
+#ifndef __KEY_H
+#define __KEY_H
+
 #include "main.h"
 
 #define KEY_PIN FREQ_Pin // 注意查看中断服务函数是否与该管脚对应
@@ -44,3 +48,4 @@ void KEY_Scan(void);
 void KEY_Process(void);
 
 extern KEY_PROCESS_TypeDef key;
+#endif

@@ -194,6 +194,7 @@ void TX_TuneFreq(unsigned long khz)
     //
     tmp[2] = status;
     TX_I2C_Write(0x06, tmp); // 恢复REG06
+    TX_Reset_Chip();
 }
 
 // 切到索引指定的频点
@@ -348,10 +349,10 @@ u8 TX_I2C_Write(u8 reg, u8 *buf)
 
     if (reg <= 0x0b)
     {
-        /* for (i = 0; i < 4; i++)
+        for (i = 0; i < 4; i++)
         {
             analog_reg_val[reg][i] = buf[i];
-        } */
+        }
     }
     //
     retry = TX_I2C_RETRY_TIMES;
@@ -366,6 +367,7 @@ u8 TX_I2C_Write(u8 reg, u8 *buf)
         for (i = 0; i < 4; i++)
         {
             IIC_SendByte(buf[i]);
+            IIC_Wait_Ack();
         }
         break;
     }
@@ -382,11 +384,11 @@ u8 TX_I2C_Read(u8 reg, u8 *buf)
 
     if (reg <= 0x0b)
     {
-        /* for (i = 0; i < 4; i++)
+        for (i = 0; i < 4; i++)
         {
             buf[i] = analog_reg_val[reg][i];
         }
-        return TRUE; */
+        return 1;
     }
     else
     {
@@ -399,10 +401,10 @@ u8 TX_I2C_Read(u8 reg, u8 *buf)
 
             reg = reg << 1;
             reg |= 0x01;
-            // IIC_Wait_Ack();
+
             if (IIC_SendByte(reg))
                 continue;
-            // IIC_Wait_Ack();
+            IIC_Wait_Ack();
 
             for (i = 0; i < 3; i++)
             {
